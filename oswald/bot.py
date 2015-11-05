@@ -18,21 +18,22 @@ def joinchan(chan): # This function is used to join channels.
 def hello(newnick): # This function responds to a user that inputs "Hello Mybot"
   ircsock.send("PRIVMSG "+ channel +" :Hello!\n")
 
+def quitIRC():
+  ircsock.send("QUIT :leaving\n")
+
+
 def commands(nick,channel,message):
-   if message.find('!shellium')!=-1:
-      ircsock.send('PRIVMSG %s :%s: Shellium is awesome!\r\n' % (channel,nick))
-   elif message.find('!help')!=-1:
-      ircsock.send('PRIVMSG %s :%s: My other command is shellium.\r\n' % (channel,nick))
-
-
+   if message.find('!help')!=-1:
+      ircsock.send('PRIVMSG %s :%s: I have no commands right now!\r\n' % (channel,nick))
+   elif message.find('!ping') !=-1:
+      ircsock.send('PRIVMSG %s :%s: pong\r\n' % (channel,nick))
 
 ircsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ircsock.connect((server, 6667))
-ircsock.send('USER ' + botnick + ' ' + botnick + ' ' + botnick + 'My Bot\n ')
+ircsock.send("USER " + botnick + " " + botnick + " " + botnick + "My Bot\n ")
 ircsock.send("NICK "+ botnick + "\n")
 ircsock.send("NICKSERV IDENTIFY " + word + "\n" )
 joinchan(channel)
-sendmsg(channel, 'Hello everybody!')
 
 while 1:
     ircmesg = ircsock.recv(2048)
@@ -45,7 +46,9 @@ while 1:
 
     if ircmesg.find(":Hello " + botnick) != -1:
         hello(botnick)
-
+    if ircmesg.find("!gtfo") != -1:
+        quitIRC()
+        exit()
     if ircmesg.find("PING :") != -1:
         ping()
 
