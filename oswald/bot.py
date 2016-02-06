@@ -38,6 +38,7 @@ ircsock.send("USER " + botnick + " " + botnick + " " + botnick + "My Bot\n ")
 ircsock.send("NICK "+ botnick + "\n")
 ircsock.send("NICKSERV IDENTIFY " + word + "\n" )
 joinchan(channel)
+sleep(100)
 
 while 1:
     ircmesg = ircsock.recv(2048)
