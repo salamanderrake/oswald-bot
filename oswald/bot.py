@@ -55,5 +55,5 @@ while 1:
         exit()
     if ircmesg.find("PING :") != -1:
         ping()
-    if travis is "travis":
+    if travis :
         print 'yo'
