@@ -5,6 +5,10 @@ server = 'irc.freenode.net'
 channel = '#fahlmant'
 botnick = 'oswald'
 word = os.environ["OSWALD"]
+if os.environ.get("TRAVIS"):
+    travis = os.environ["TRAVIS"]
+
+
 
 def ping():
     ircsock.send("PONG :pong\n")
@@ -51,4 +55,5 @@ while 1:
         exit()
     if ircmesg.find("PING :") != -1:
         ping()
-
+    if(travis.equals("travis"):
+        break
