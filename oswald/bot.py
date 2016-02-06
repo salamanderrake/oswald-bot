@@ -56,4 +56,4 @@ while 1:
     if ircmesg.find("PING :") != -1:
         ping()
     if travis :
-        print 'yo'
+        quitIRC()
